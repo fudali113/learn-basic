@@ -1,4 +1,4 @@
-package sorts
+package sort
 
 // CheckSort check sort is right
 func CheckSort(array []int) (res bool) {
