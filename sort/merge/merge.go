@@ -1,11 +1,11 @@
 package merge
 
-func sort(array []int) []int {
+func mergeSort(array []int) []int {
 	middle := len(array) / 2
 	if middle == 1 {
 		return array
 	}
-	return merge(sort(array[:middle]), sort(array[middle:]))
+	return merge(mergeSort(array[:middle]), mergeSort(array[middle:]))
 }
 
 func merge(a1 []int, a2 []int) []int {

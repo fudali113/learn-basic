@@ -1,6 +1,6 @@
 package insertion
 
-func sort(array []int) {
+func insertionSort(array []int) {
 	n := 0
 	// 从1开始遍历,因为0前面没有数值
 	for i := 1; i < len(array); i++ {

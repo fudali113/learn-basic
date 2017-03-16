@@ -2,7 +2,7 @@ package quick
 
 // sort ...
 // TODO
-func sort(array []int) {
+func quickSort(array []int) {
 	n := 0
 	// 从1开始遍历,因为0前面没有数值
 	for i := 1; i < len(array); i++ {

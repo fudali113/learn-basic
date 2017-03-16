@@ -1,6 +1,6 @@
 package shell
 
-func sort(array []int) {
+func shellSort(array []int) {
 	n := 0
 	arrayLen := len(array)
 	for gap := arrayLen / 2; gap > 0; gap /= 2 {
