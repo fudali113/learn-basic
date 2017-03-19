@@ -1,45 +1,35 @@
 package merge
 
-func mergeSort(array []int) []int {
+// MergeSort 归并排序
+func MergeSort(array []int) []int {
 	middle := len(array) / 2
-	if middle == 1 {
+	if middle < 1 {
 		return array
 	}
-	return merge(mergeSort(array[:middle]), mergeSort(array[middle:]))
+	return merge(MergeSort(array[:middle]), MergeSort(array[middle:]))
 }
 
+// merge 合并两个排好序的数组唯一组合两个元素并排好序的数组
 func merge(a1 []int, a2 []int) []int {
 	a1Index := 0
 	a2Index := 0
-	resIndex := 0
-	resLen := len(a1) + len(a2)
-	res := make([]int, resLen)
-	for i := 0; i < resLen; i++ {
-
-		if a1Index == len(a1)-1 {
-			for ; a2Index < len(a2); a2Index++ {
-				res[resIndex] = a2[a2Index]
-				resIndex++
+	res := make([]int, 0, len(a1)+len(a2))
+	for {
+		if a1[a1Index] <= a2[a2Index] {
+			res = append(res, a1[a1Index])
+			if a1Index == len(a1)-1 {
+				res = append(res, a2[a2Index:]...)
+				break
 			}
-			break
-		}
-
-		if a2Index == len(a1)-1 {
-			for ; a1Index < len(a1); a1Index++ {
-				res[resIndex] = a1[a1Index]
-				resIndex++
-			}
-			break
-		}
-
-		if a1[a1Index] < a2[a2Index] {
-			res[resIndex] = a1[a1Index]
 			a1Index++
 		} else {
-			res[resIndex] = a2[a2Index]
+			res = append(res, a2[a2Index])
+			if a2Index == len(a1)-1 {
+				res = append(res, a1[a1Index:]...)
+				break
+			}
 			a2Index++
 		}
-		resIndex++
 	}
 	return res
 }

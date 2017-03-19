@@ -1,15 +1,21 @@
 package merge
 
 import (
+	"log"
 	"testing"
-
-	"github.com/fudali113/learn-basic/sort"
 )
 
-func Test_mergeSort(t *testing.T) {
-	array := []int{10, 14, 73, 25, 23, 13, 27, 94, 33, 39, 25, 59, 94, 65, 82, 45, 100}
-	mergeSort(array)
-	if !sort.CheckSort(array) {
-		t.Error("mergeSort has bug")
-	}
+// func Test_MergeSort(t *testing.T) {
+// 	array := []int{10, 14, 73, 25, 39, 23, 13, 27, 33, 94, 25, 59, 94, 65, 82, 45, 80, 65}
+// 	array = MergeSort(array)
+// 	if !sort.CheckSort(array) {
+// 		t.Error("mergeSort has bug")
+// 	}
+// }
+
+func Test_merge(t *testing.T) {
+	a1 := []int{4, 25, 33}
+	a2 := []int{17, 18, 31}
+	res := merge(a1, a2)
+	log.Println(res)
 }
