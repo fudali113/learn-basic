@@ -42,7 +42,7 @@ func Test_reset(t *testing.T) {
 }
 
 func Test_HeadInsert(t *testing.T) {
-	h := GetHead(true)
+	h := GetHeap(true)
 	h.Insert(1)
 	h.Insert(2)
 	h.Insert(5)
@@ -56,7 +56,7 @@ func Test_HeadInsert(t *testing.T) {
 	log.Println(h.Delete())
 	log.Println(h.Delete())
 
-	h = GetHead(false)
+	h = GetHeap(false)
 	h.Insert(1)
 	h.Insert(2)
 	h.Insert(5)

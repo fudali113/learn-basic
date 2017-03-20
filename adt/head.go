@@ -2,23 +2,23 @@ package adt
 
 import "fmt"
 
-// Head 堆结构
+// Heap 堆结构
 // 数组形式为index为0的元素默认为空，总index为1元素开始
 // 方便定位元素
 // 即如往堆里插入1,2,3,4,5
 // 数组元素为[0,1,2,3,4,5]
-type Head struct {
+type Heap struct {
 	array []int
-	isMax bool
+	isMax bool // 表示最大堆还是最小堆
 }
 
-// GetHead 获取一个Head实列
-func GetHead(isMax bool) *Head {
-	return &Head{array: make([]int, 1, 8), isMax: isMax}
+// GetHeap 获取一个Heap实列
+func GetHeap(isMax bool) *Heap {
+	return &Heap{array: make([]int, 1, 8), isMax: isMax}
 }
 
 // Insert 插入一个元素
-func (h *Head) Insert(value int) {
+func (h *Heap) Insert(value int) {
 	if h.array == nil {
 		h.array = make([]int, 1, 8)
 	}
@@ -26,7 +26,7 @@ func (h *Head) Insert(value int) {
 }
 
 // Delete 删除并获取堆顶
-func (h *Head) Delete() (top int, err error) {
+func (h *Heap) Delete() (top int, err error) {
 	h.array, top, err = reset(h.array, h.isMax)
 	return top, err
 }
