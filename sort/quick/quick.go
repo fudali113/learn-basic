@@ -1,6 +1,10 @@
 package quick
 
+import "log"
+
 // QuickSort 快速排序
+// 是否稳定?
+// 不稳定 可以试着分析下[5,1,2,2,3,4,5]
 func QuickSort(array []int) {
 	quickSort(array, 0, len(array))
 }
@@ -17,6 +21,7 @@ func quickSort(array []int, left, right int) {
 }
 
 // swap 按最开始的中位置下标将数组分为比中位置大和比中位值小的两个数组
+// left right 遵循右开左闭
 // return 划分后的中位值下标
 func swap(array []int, left, right, medianIndex int) (nowMedianIndex int) {
 	median := array[medianIndex]
@@ -63,10 +68,11 @@ func swap(array []int, left, right, medianIndex int) (nowMedianIndex int) {
 // 比较数组开头，结尾和中间位置的值，放回处于中间的值得数组下标
 // return 中位值数组下标
 func median3(array []int, left, right int) int {
-	index := (right - left - 1) / 2
+	index := (right + left - 1) / 2
 	start := array[left]
 	median := array[index]
 	end := array[right-1]
+	log.Println(start, median, end, array[left:right])
 	if median > start {
 		if median <= end {
 			return index
