@@ -1,5 +1,7 @@
 package adt
 
+import "fmt"
+
 // Head 堆结构
 // 数组形式为index为0的元素默认为空，总index为1元素开始
 // 方便定位元素
@@ -56,10 +58,13 @@ func getFaIndex(index int) int {
 }
 
 // Delete 删除并获取堆顶
-func (h Head) Delete() int {
+func (h Head) Delete() (int, error) {
+	if len(h.array) < 2 {
+		return 0, fmt.Errorf("改堆内以没有元素")
+	}
 	top := h.array[1]
 	h.array = reset(h.array)
-	return top
+	return top, nil
 }
 
 // reset 重设置一个数组
@@ -74,16 +79,22 @@ func reset(array []int) []int {
 
 // getLastInsertIndex 下虑
 func getLastInsertIndex(array []int, nowIndex int, value int) int {
+	status := noGo
+	lastIndex := len(array) - 1
 	leftIndex, rightIndex := getSonIndex(nowIndex)
-	left, right := array[leftIndex], array[rightIndex]
-	status := getStatus(left, right, value)
+	if lastIndex >= rightIndex {
+		left, right := array[leftIndex], array[rightIndex]
+		status = getStatus(left, right, value)
+	} else if lastIndex == leftIndex && array[leftIndex] > value {
+		status = goLeft
+	}
 	switch status {
-	case NO:
+	case noGo:
 		return nowIndex
-	case LEFT:
+	case goLeft:
 		array[nowIndex], array[leftIndex] = array[leftIndex], value
 		return getLastInsertIndex(array, leftIndex, value)
-	case RIGHT:
+	case goRight:
 		array[nowIndex], array[rightIndex] = array[rightIndex], value
 		return getLastInsertIndex(array, rightIndex, value)
 	}
@@ -91,9 +102,9 @@ func getLastInsertIndex(array []int, nowIndex int, value int) int {
 }
 
 const (
-	NO = iota
-	LEFT
-	RIGHT
+	noGo = iota
+	goLeft
+	goRight
 )
 
 // getStatus 根据三个值获取走那边获取步鄹

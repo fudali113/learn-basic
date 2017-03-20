@@ -30,3 +30,13 @@ func Test_insert(t *testing.T) {
 	test = insert(test, 4)
 	log.Println(test)
 }
+
+func Test_reset(t *testing.T) {
+	test := []int{0, 5, 4, 3, 1}
+	test = reset(test)
+	log.Println(test)
+	test = reset(test)
+	log.Println(test)
+	test = reset(test)
+	log.Println(test)
+}
