@@ -31,6 +31,19 @@ func (h *Heap) Delete() (top int, err error) {
 	return top, err
 }
 
+// Get 获取堆顶元素但是不删除
+func (h *Heap) Get() (top int, err error) {
+	if len(h.array) > 1 {
+		return h.array[1], nil
+	}
+	return 0, fmt.Errorf("堆中已无元素")
+}
+
+// Len 获取数组的长度
+func (h *Heap) Len() int {
+	return len(h.array) - 1
+}
+
 // getCompareResult 比较
 func getCompareResult(o1, o2 int, isMax bool) int {
 	if o1 == o2 {
