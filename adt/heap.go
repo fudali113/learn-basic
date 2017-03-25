@@ -18,11 +18,13 @@ func GetHeap(isMax bool) *Heap {
 }
 
 // Insert 插入一个元素
-func (h *Heap) Insert(value int) {
+func (h *Heap) Insert(values ...int) {
 	if h.array == nil {
 		h.array = make([]int, 1, 8)
 	}
-	h.array = insert(h.array, value, h.isMax)
+	for i := 0; i < len(values); i++ {
+		h.array = insert(h.array, values[i], h.isMax)
+	}
 }
 
 // Delete 删除并获取堆顶
